@@ -1,0 +1,422 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0a0a;
+  --bg-soft: #111111;
+  --text: #f2f0eb;
+  --text-muted: #9a978f;
+  --line: #2a2a2a;
+  --line-soft: rgba(255, 255, 255, 0.08);
+  --accent: #e8b16b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-serif);
+}
+
+/* subtle top hairline glow like the reference */
+.top-hairline {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent) 20%,
+    #c96b4a 50%,
+    var(--accent) 80%,
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-enter {
+    animation: hero-fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hero-enter-delay-1 { animation-delay: 0.08s; }
+  .hero-enter-delay-2 { animation-delay: 0.18s; }
+  .hero-enter-delay-3 { animation-delay: 0.28s; }
+  .hero-enter-delay-4 { animation-delay: 0.38s; }
+
+  @keyframes hero-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Terminal-style intro (plays once per session)                          */
+/* ---------------------------------------------------------------------- */
+
+.intro-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+}
+
+.intro-loader-fade {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-loader {
+    transition: opacity 200ms ease-out;
+  }
+  .intro-loader-fade {
+    transform: none;
+  }
+}
+
+.intro-terminal {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--text);
+  text-align: left;
+  padding: 0 1.5rem;
+}
+
+.intro-prompt {
+  color: var(--text-muted);
+  margin-right: 0.4em;
+}
+
+.intro-line {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.intro-ready {
+  color: var(--text);
+}
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient-glow {
+  position: absolute;
+  width: min(60vw, 900px);
+  height: min(60vw, 900px);
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.06;
+  will-change: transform;
+}
+
+.ambient-glow-1 {
+  top: -12%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(245, 238, 225, 0.55), transparent 70%);
+}
+
+.ambient-glow-2 {
+  bottom: -18%;
+  right: -12%;
+  opacity: 0.05;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.5), transparent 70%);
+}
+
+.ambient-glow-3 {
+  top: 38%;
+  left: 45%;
+  opacity: 0.045;
+  background: radial-gradient(circle, rgba(125, 211, 252, 0.5), transparent 70%);
+}
+
+.ambient-grid {
+  position: absolute;
+  inset: -80px;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.ambient-mouse-glow {
+  position: absolute;
+  inset: 0;
+  --mx: 50vw;
+  --my: 50vh;
+  background: radial-gradient(
+    circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 0.05),
+    transparent 40%
+  );
+  transition: opacity 400ms ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ambient-glow-1 {
+    animation: ambient-drift-1 20s ease-in-out infinite alternate;
+  }
+  .ambient-glow-2 {
+    animation: ambient-drift-2 25s ease-in-out infinite alternate;
+  }
+  .ambient-glow-3 {
+    animation: ambient-drift-3 18s ease-in-out infinite alternate;
+  }
+  .ambient-grid {
+    animation: ambient-grid-drift 40s linear infinite;
+  }
+}
+
+@keyframes ambient-drift-1 {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(8vw, 6vh);
+  }
+}
+
+@keyframes ambient-drift-2 {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-6vw, -8vh);
+  }
+}
+
+@keyframes ambient-drift-3 {
+  from {
+    transform: translate(-4vw, -2vh);
+  }
+  to {
+    transform: translate(4vw, 4vh);
+  }
+}
+
+@keyframes ambient-grid-drift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 72px 72px, 72px 72px;
+  }
+}
+
+/* smaller screens: calmer background, no mouse glow (no fine pointer anyway) */
+@media (max-width: 768px) {
+  .ambient-glow {
+    width: 70vw;
+    height: 70vw;
+    filter: blur(90px);
+    opacity: 0.04;
+  }
+  .ambient-grid {
+    opacity: 0.6;
+  }
+}
+/* hide the native cursor only where a custom fine-pointer cursor makes
+   sense (desktop mouse/trackpad) — touch devices keep the normal behavior */
+@media (pointer: fine) {
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
+    cursor: none;
+  }
+}
+
+.custom-cursor-outer,
+.custom-cursor-inner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: width 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    opacity 200ms ease;
+}
+
+.custom-cursor-outer {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  z-index: 9998;
+}
+
+.custom-cursor-inner {
+  width: 5px;
+  height: 5px;
+  background: rgba(242, 240, 235, 0.92);
+  box-shadow: 0 0 6px rgba(242, 240, 235, 0.35);
+  z-index: 9999;
+}
+
+.custom-cursor-outer.cursor-hover {
+  width: 48px;
+  height: 48px;
+  border-color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.08);
+}
+
+.custom-cursor-inner.cursor-hover {
+  width: 7px;
+  height: 7px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor-outer,
+  .custom-cursor-inner {
+    transition: opacity 150ms ease;
+  }
+}
+
+@keyframes cursor-blink {
+  0%, 45% {
+    opacity: 1;
+  }
+  50%, 95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s step-start infinite;
+}
+
+/* very subtle animated highlight travelling around the badge border */
+.badge-ring {
+  position: relative;
+  isolation: isolate;
+}
+
+.badge-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 1px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 82%,
+    rgba(255, 255, 255, 0.5) 90%,
+    transparent 98%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .badge-ring::before {
+    animation: badge-rotate 7s linear infinite;
+  }
+}
+
+@keyframes badge-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* thin elegant typewriter caret (not a chunky terminal block) */
+.typewriter-caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 0.85em;
+  margin-left: 3px;
+  background: currentColor;
+  vertical-align: middle;
+  transform: translateY(0.05em);
+  opacity: 1;
+}
+
+.typewriter-caret-blink {
+  animation: cursor-blink 1s ease-in-out infinite;
+}
+
+/* hero ambience: soft grain + gentle floating motion for the aside card & dots */
+.hero-grid-texture {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 60% 55% at 50% 35%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 35%, black 40%, transparent 85%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .float-slow {
+    animation: float-y 6s ease-in-out infinite;
+  }
+  .float-dot {
+    animation: float-y 5s ease-in-out infinite;
+  }
+  .scroll-arrow {
+    animation: scroll-bounce 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes float-y {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes scroll-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+}
