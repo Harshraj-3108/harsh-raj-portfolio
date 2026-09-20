@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { supabase } from "@/lib/supabaseClient";
 import { site } from "@/config/site";
+import { isValidEmail } from "@/lib/emailValidation";
 
 function escapeHtml(str: string) {
   return str
@@ -22,6 +23,13 @@ export async function POST(request: Request) {
     if (!email || !message) {
       return NextResponse.json(
         { error: "Please fill in both your email and message." },
+        { status: 400 }
+      );
+    }
+
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { error: "Please enter a valid email address." },
         { status: 400 }
       );
     }

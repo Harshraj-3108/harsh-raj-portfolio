@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Mail, CheckCircle2, AlertCircle } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { site } from "@/config/site";
+import { isValidEmail } from "@/lib/emailValidation";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -12,9 +13,20 @@ export default function Contact() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const normalizedEmail = email.trim();
+
+    if (!isValidEmail(normalizedEmail)) {
+      setEmailError("Please enter a valid email address.");
+      setErrorMessage("");
+      setStatus("idle");
+      return;
+    }
+
+    setEmailError("");
     setStatus("sending");
     setErrorMessage("");
 
@@ -22,7 +34,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, message }),
+        body: JSON.stringify({ email: normalizedEmail, message }),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -103,16 +115,36 @@ export default function Contact() {
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="flex flex-col gap-4"
+            >
               <input
                 type="email"
                 required
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  const nextEmail = e.target.value;
+                  setEmail(nextEmail);
+                  if (isValidEmail(nextEmail)) {
+                    setEmailError("");
+                  }
+                }}
                 placeholder="Your Email"
                 disabled={isSending}
+                aria-invalid={emailError ? "true" : undefined}
+                aria-describedby={emailError ? "contact-email-error" : undefined}
                 className="rounded-xl border border-white/15 bg-transparent px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] outline-none transition-colors focus:border-white/30 disabled:opacity-60"
               />
+              {emailError && (
+                <p
+                  id="contact-email-error"
+                  className="-mt-2 text-xs text-rose-300"
+                >
+                  {emailError}
+                </p>
+              )}
               <textarea
                 required
                 value={message}
