@@ -25,13 +25,33 @@ export const metadata: Metadata = {
     "Portfolio of Harsh Raj, a Computer Science student and aspiring software developer building thoughtful web experiences and practical software solutions.",
 };
 
+const themeScript = `
+  (() => {
+    try {
+      const storedTheme = localStorage.getItem("portfolio-theme");
+      const theme =
+        storedTheme === "light" || storedTheme === "dark"
+          ? storedTheme
+          : window.matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark";
+      document.documentElement.dataset.theme = theme;
+    } catch {
+      document.documentElement.dataset.theme = "dark";
+    }
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${playfair.variable} ${manrope.variable} antialiased`}>
         <ScrollToTop />
         <AmbientBackground />

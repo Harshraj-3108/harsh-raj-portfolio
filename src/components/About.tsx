@@ -58,7 +58,7 @@ export default function About() {
             delay={0.1}
             className="flex flex-col items-center text-center md:items-start md:text-left"
           >
-            <div className="h-40 w-40 overflow-hidden rounded-full border border-white/15">
+            <div className="h-40 w-40 overflow-hidden rounded-full border border-[var(--line-soft)]">
               <Image
                 src="/profile.jpg"
                 alt={site.name}
@@ -78,7 +78,7 @@ export default function About() {
           </Reveal>
 
           {/* divider */}
-          <div className="hidden md:block bg-white/10" />
+          <div className="hidden bg-[var(--line-soft)] md:block" />
 
           {/* right: education, experience, tech stack */}
           <div className="flex flex-col gap-10">
@@ -87,7 +87,7 @@ export default function About() {
               <h3 className="font-display text-2xl font-medium text-[var(--text)]">
                 Education
               </h3>
-              <div className="mt-4 flex flex-col gap-5 border-t border-white/10 pt-4">
+              <div className="mt-4 flex flex-col gap-5 border-t border-[var(--line-soft)] pt-4">
                 {education.map((edu) => (
                   <div
                     key={edu.school}
@@ -116,7 +116,7 @@ export default function About() {
                 <h3 className="font-display text-2xl font-medium text-[var(--text)]">
                   Experience
                 </h3>
-                <div className="mt-4 flex flex-col gap-6 border-t border-white/10 pt-4">
+                <div className="mt-4 flex flex-col gap-6 border-t border-[var(--line-soft)] pt-4">
                   {experience.map((exp) => (
                     <div key={exp.company}>
                       <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-start">
@@ -136,7 +136,7 @@ export default function About() {
                         {exp.points.map((point) => (
                           <li
                             key={point}
-                            className="border-l-2 border-white/15 pl-3 text-sm text-[var(--text-muted)]"
+                            className="border-l-2 border-[var(--line-soft)] pl-3 text-sm text-[var(--text-muted)]"
                           >
                             {point}
                           </li>
@@ -153,7 +153,7 @@ export default function About() {
               <h3 className="font-display text-2xl font-medium text-[var(--text)]">
                 Tech Stack
               </h3>
-              <div className="mt-4 flex flex-wrap gap-2 border-t border-white/10 pt-4">
+              <div className="mt-4 flex flex-wrap gap-2 border-t border-[var(--line-soft)] pt-4">
                 {techStack.map((tech, i) => {
                   const Icon = tech.icon;
                   return (
@@ -167,7 +167,7 @@ export default function About() {
                         delay: 0.02 * i,
                         ease: "easeOut",
                       }}
-                      className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.03] px-3.5 py-1.5 text-sm text-[var(--text)]"
+                      className="flex items-center gap-1.5 rounded-full border border-[var(--line-soft)] bg-[var(--surface)] px-3.5 py-1.5 text-sm text-[var(--text)]"
                     >
                       <Icon size={15} color={tech.color} />
                       {tech.name}

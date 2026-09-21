@@ -21,8 +21,8 @@ export default function Projects() {
 
         {/* terminal-style "coming soon" card */}
         <Reveal delay={0.15} className="mt-16">
-          <div className="mx-auto overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] text-left shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
-            <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
+          <div className="mx-auto overflow-hidden rounded-2xl border border-[var(--line-soft)] bg-[var(--surface-soft)] text-left shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+            <div className="flex items-center gap-1.5 border-b border-[var(--line-soft)] px-4 py-3">
               <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
               <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
               <span className="h-3 w-3 rounded-full bg-[#27c93f]" />

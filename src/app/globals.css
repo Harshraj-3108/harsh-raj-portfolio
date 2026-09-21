@@ -3,11 +3,31 @@
 :root {
   --bg: #0a0a0a;
   --bg-soft: #111111;
+  --nav-bg: #111111;
   --text: #f2f0eb;
   --text-muted: #9a978f;
   --line: #2a2a2a;
   --line-soft: rgba(255, 255, 255, 0.08);
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-soft: rgba(255, 255, 255, 0.02);
+  --surface-hover: rgba(255, 255, 255, 0.08);
   --accent: #e8b16b;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f7f5f0;
+  --bg-soft: #eeebe4;
+  --nav-bg: #fbfaf7;
+  --text: #1b1a18;
+  --text-muted: #6b675f;
+  --line: #d8d3ca;
+  --line-soft: rgba(35, 32, 27, 0.14);
+  --surface: rgba(35, 32, 27, 0.04);
+  --surface-soft: rgba(35, 32, 27, 0.025);
+  --surface-hover: rgba(35, 32, 27, 0.08);
+  --accent: #a65f25;
+  color-scheme: light;
 }
 
 * {
@@ -22,6 +42,14 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
+  transition: background-color 350ms ease, color 350ms ease;
+}
+
+body,
+body * {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 350ms;
+  transition-timing-function: ease;
 }
 
 .font-display {

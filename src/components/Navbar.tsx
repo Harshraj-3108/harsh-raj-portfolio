@@ -55,6 +55,27 @@ export default function Navbar() {
   const [isDark, setIsDark] = useState(true);
   const [active, setActive] = useState("home");
 
+  useEffect(() => {
+    const root = document.documentElement;
+    const currentTheme = root.dataset.theme;
+    if (currentTheme === "light" || currentTheme === "dark") {
+      // The root theme is set before hydration to avoid a flash of the wrong theme.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsDark(currentTheme === "dark");
+    }
+  }, []);
+
+  function toggleTheme() {
+    const nextTheme = isDark ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    setIsDark(nextTheme === "dark");
+    try {
+      localStorage.setItem("portfolio-theme", nextTheme);
+    } catch {
+      // The theme still applies for the current visit if storage is unavailable.
+    }
+  }
+
   // scroll-spy: highlight whichever section the user has scrolled to.
   // Uses each section's position relative to scroll offset instead of
   // IntersectionObserver, so it can't get confused when two short
@@ -112,7 +133,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="flex items-center gap-1.5 rounded-full border border-white/10 bg-[#111111]/90 backdrop-blur-md px-2.5 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+      <div className="flex items-center gap-1.5 rounded-full border border-[var(--line-soft)] bg-[var(--nav-bg)]/90 px-2.5 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-md">
         {navItems.map(({ id, href, label, icon: Icon }) => {
           const isActive = active === id;
           return (
@@ -146,14 +167,14 @@ export default function Navbar() {
           );
         })}
 
-        <span className="mx-1 h-5 w-px bg-white/10" aria-hidden="true" />
+        <span className="mx-1 h-5 w-px bg-[var(--line-soft)]" aria-hidden="true" />
 
         <a
           href={site.links.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
-          className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:text-[var(--text)] hover:bg-white/5"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text)]"
         >
           <motion.span
             whileHover={{ scale: 1.15, y: -1 }}
@@ -169,7 +190,7 @@ export default function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:text-[var(--text)] hover:bg-white/5"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text)]"
         >
           <motion.span
             whileHover={{ scale: 1.15, y: -1 }}
@@ -181,13 +202,14 @@ export default function Navbar() {
           </motion.span>
         </a>
 
-        <span className="mx-1 h-5 w-px bg-white/10" aria-hidden="true" />
+        <span className="mx-1 h-5 w-px bg-[var(--line-soft)]" aria-hidden="true" />
 
         <button
           type="button"
-          onClick={() => setIsDark((v) => !v)}
-          aria-label="Toggle theme"
-          className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:text-[var(--text)] hover:bg-white/5"
+          onClick={toggleTheme}
+          aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          aria-pressed={!isDark}
+          className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text)]"
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.span

@@ -38,28 +38,28 @@ export default function Hero() {
       {/* a few tiny ambient dots, floating gently */}
       <span
         aria-hidden="true"
-        className="float-dot pointer-events-none absolute top-[22%] left-[14%] hidden h-1 w-1 rounded-full bg-white/25 sm:block"
+        className="float-dot pointer-events-none absolute top-[22%] left-[14%] hidden h-1 w-1 rounded-full bg-[var(--text)]/25 sm:block"
         style={{ animationDelay: "0s" }}
       />
       <span
         aria-hidden="true"
-        className="float-dot pointer-events-none absolute top-[65%] left-[20%] hidden h-1.5 w-1.5 rounded-full bg-white/15 sm:block"
+        className="float-dot pointer-events-none absolute top-[65%] left-[20%] hidden h-1.5 w-1.5 rounded-full bg-[var(--text)]/15 sm:block"
         style={{ animationDelay: "1.2s" }}
       />
       <span
         aria-hidden="true"
-        className="float-dot pointer-events-none absolute top-[30%] right-[16%] hidden h-1 w-1 rounded-full bg-white/20 sm:block"
+        className="float-dot pointer-events-none absolute top-[30%] right-[16%] hidden h-1 w-1 rounded-full bg-[var(--text)]/20 sm:block"
         style={{ animationDelay: "2.1s" }}
       />
       <span
         aria-hidden="true"
-        className="float-dot pointer-events-none absolute top-[70%] right-[22%] hidden h-1.5 w-1.5 rounded-full bg-white/10 sm:block"
+        className="float-dot pointer-events-none absolute top-[70%] right-[22%] hidden h-1.5 w-1.5 rounded-full bg-[var(--text)]/10 sm:block"
         style={{ animationDelay: "0.6s" }}
       />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1000px] flex-col items-center justify-center px-6 pt-28 pb-24 text-center">
         {/* eyebrow badge */}
-        <div className="hero-enter badge-ring mb-6 rounded-full border border-white/12 px-4 py-1.5 text-xs text-[var(--text-muted)] sm:text-sm">
+        <div className="hero-enter badge-ring mb-6 rounded-full border border-[var(--line-soft)] px-4 py-1.5 text-xs text-[var(--text-muted)] sm:text-sm">
           {site.tagline}
         </div>
 
@@ -100,13 +100,13 @@ export default function Hero() {
             href={site.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-medium text-[var(--text)] transition-all duration-[250ms] ease-out hover:-translate-y-0.5 hover:bg-white/[0.09] hover:shadow-[0_8px_24px_rgba(232,177,107,0.15)]"
+            className="group flex items-center gap-2 rounded-full border border-[var(--line-soft)] bg-[var(--surface)] px-6 py-3 text-sm font-medium text-[var(--text)] transition-all duration-[250ms] ease-out hover:-translate-y-0.5 hover:bg-[var(--surface-hover)] hover:shadow-[0_8px_24px_rgba(232,177,107,0.15)]"
           >
             <span aria-hidden="true">👋</span> Let&apos;s Connect
           </a>
           <a
             href={site.links.projects}
-            className="group flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-[var(--text)] transition-all duration-[250ms] ease-out hover:border-white/35"
+            className="group flex items-center gap-2 rounded-full border border-[var(--line-soft)] px-6 py-3 text-sm font-medium text-[var(--text)] transition-all duration-[250ms] ease-out hover:border-[var(--text-muted)]"
           >
             View Projects{" "}
             <ArrowRight
@@ -131,7 +131,7 @@ export default function Hero() {
       {/* floating "currently building" card — desktop only, lower-right */}
       <div
         aria-hidden="false"
-        className="float-slow pointer-events-none absolute right-10 bottom-24 hidden w-56 rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-left shadow-[0_20px_40px_rgba(0,0,0,0.35)] backdrop-blur-sm lg:block"
+        className="float-slow pointer-events-none absolute right-10 bottom-24 hidden w-56 rounded-2xl border border-[var(--line-soft)] bg-[var(--surface)] p-4 text-left shadow-[0_20px_40px_rgba(0,0,0,0.35)] backdrop-blur-sm lg:block"
       >
         <p className="text-[11px] tracking-wide text-[var(--text-muted)] uppercase">
           Currently building

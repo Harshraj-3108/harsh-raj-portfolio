@@ -79,22 +79,22 @@ export default function Contact() {
 
         <Reveal
           delay={0.15}
-          className="mt-12 rounded-3xl border border-white/10 bg-white/[0.02] p-6 sm:p-8"
+          className="mt-12 rounded-3xl border border-[var(--line-soft)] bg-[var(--surface-soft)] p-6 sm:p-8"
         >
           <a
             href={`mailto:${site.email}`}
-            className="flex items-center justify-center gap-2 rounded-xl border border-white/15 px-4 py-3 text-sm text-[var(--text)] transition-colors hover:bg-white/5"
+            className="flex items-center justify-center gap-2 rounded-xl border border-[var(--line-soft)] px-4 py-3 text-sm text-[var(--text)] transition-colors hover:bg-[var(--surface-hover)]"
           >
             <Mail size={16} strokeWidth={1.75} />
             {site.email}
           </a>
 
           <div className="my-6 flex items-center gap-4">
-            <span className="h-px flex-1 bg-white/10" />
+            <span className="h-px flex-1 bg-[var(--line-soft)]" />
             <span className="text-xs whitespace-nowrap text-[var(--text-muted)]">
               Or send a message
             </span>
-            <span className="h-px flex-1 bg-white/10" />
+            <span className="h-px flex-1 bg-[var(--line-soft)]" />
           </div>
 
           {status === "sent" ? (
@@ -135,7 +135,7 @@ export default function Contact() {
                 disabled={isSending}
                 aria-invalid={emailError ? "true" : undefined}
                 aria-describedby={emailError ? "contact-email-error" : undefined}
-                className="rounded-xl border border-white/15 bg-transparent px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] outline-none transition-colors focus:border-white/30 disabled:opacity-60"
+                className="rounded-xl border border-[var(--line-soft)] bg-transparent px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] outline-none transition-colors focus:border-[var(--text-muted)] disabled:opacity-60"
               />
               {emailError && (
                 <p
@@ -152,12 +152,12 @@ export default function Contact() {
                 placeholder="Your Message"
                 rows={5}
                 disabled={isSending}
-                className="resize-none rounded-xl border border-white/15 bg-white/[0.02] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] outline-none transition-colors focus:border-white/30 disabled:opacity-60"
+                className="resize-none rounded-xl border border-[var(--line-soft)] bg-[var(--surface-soft)] px-4 py-3 text-sm text-[var(--text)] placeholder:text-[var(--text-muted)] outline-none transition-colors focus:border-[var(--text-muted)] disabled:opacity-60"
               />
               <button
                 type="submit"
                 disabled={isSending}
-                className="rounded-xl border border-white/15 px-4 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:bg-white/10 disabled:opacity-60"
+                className="rounded-xl border border-[var(--line-soft)] px-4 py-3 text-sm font-medium text-[var(--text)] transition-colors hover:bg-[var(--surface-hover)] disabled:opacity-60"
               >
                 {isSending ? "Sending..." : "Send Message"}
               </button>
