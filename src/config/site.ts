@@ -12,6 +12,7 @@ export const site = {
     home: "#home",
     about: "#about",
     projects: "#projects",
+    achievements: "#achievements",
     contact: "#contact",
     linkedin: "https://www.linkedin.com/in/harsh-raj-444460359",
     github: "https://github.com/Harshraj-3108",

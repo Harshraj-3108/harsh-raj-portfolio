@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
@@ -35,6 +36,15 @@ const education: Education[] = [
 const experience: ExperienceItem[] = [];
 
 export default function About() {
+  // `mounted` guards react-icons SVG rendering to the client only.
+  // react-icons inject an inline `color` style prop (e.g. `color: "#F24E1E"`) that the
+  // Dark Reader browser extension rewrites to `rgb(...)` + `data-darkreader-*` attrs after SSR
+  // but before React hydration, causing a server/client mismatch warning.
+  // By rendering the icon only after mount we ensure SSR outputs no icon markup,
+  // eliminating the diff entirely without using suppressHydrationWarning.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   return (
     <section id="about" className="relative px-6 py-28 sm:py-32">
       <div className="mx-auto max-w-5xl">
@@ -169,7 +179,8 @@ export default function About() {
                       }}
                       className="flex items-center gap-1.5 rounded-full border border-[var(--line-soft)] bg-[var(--surface)] px-3.5 py-1.5 text-sm text-[var(--text)]"
                     >
-                      <Icon size={15} color={tech.color} />
+                      {/* Icon rendered client-only to prevent Dark Reader hydration mismatch */}
+                      {mounted && <Icon size={15} color={tech.color} />}
                       {tech.name}
                     </motion.span>
                   );

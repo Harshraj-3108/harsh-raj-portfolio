@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, SquareUser, SquareCode, Mail, Sun, Moon } from "lucide-react";
+import { Home, SquareUser, SquareCode, Trophy, Mail, Sun, Moon } from "lucide-react";
 import { site } from "@/config/site";
 
 function LinkedinIcon({ size = 17 }: { size?: number }) {
@@ -48,6 +48,7 @@ const navItems = [
   { id: "home", href: site.links.home, label: "Home", icon: Home },
   { id: "about", href: site.links.about, label: "About", icon: SquareUser },
   { id: "projects", href: site.links.projects, label: "Projects", icon: SquareCode },
+  { id: "achievements", href: site.links.achievements, label: "Achievements", icon: Trophy },
   { id: "contact", href: site.links.contact, label: "Contact", icon: Mail },
 ];
 
