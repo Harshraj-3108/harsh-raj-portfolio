@@ -57,21 +57,21 @@ export default function Hero() {
         style={{ animationDelay: "0.6s" }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1000px] flex-col items-center justify-center px-6 pt-28 pb-24 text-center">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1000px] flex-col items-center justify-center px-5 pt-28 pb-24 text-center sm:px-6">
         {/* eyebrow badge */}
         <div className="hero-enter badge-ring mb-6 rounded-full border border-[var(--line-soft)] px-4 py-1.5 text-xs text-[var(--text-muted)] sm:text-sm">
           {site.tagline}
         </div>
 
         {/* headline */}
-        <h1 className="hero-enter hero-enter-delay-1 font-display text-[2.6rem] leading-[1.15] font-medium text-[var(--text)] sm:text-6xl sm:leading-[1.14] lg:text-7xl">
+        <h1 className="hero-enter hero-enter-delay-1 font-display text-[clamp(2rem,8.5vw,2.6rem)] leading-[1.15] font-medium text-[var(--text)] sm:text-6xl sm:leading-[1.14] lg:text-7xl">
           Building Digital Experiences
           <br />
           <span className="italic">That Feel Fast &amp; Effortless.</span>
         </h1>
 
         {/* rotating role typewriter */}
-        <p className="hero-enter hero-enter-delay-2 mt-6 min-h-[1.6em] text-lg text-[var(--text-muted)] sm:text-xl">
+        <p className="hero-enter hero-enter-delay-2 mt-5 min-h-[1.6em] text-lg text-[var(--text-muted)] sm:mt-6 sm:text-xl">
           I&apos;m a{" "}
           <span className="font-medium text-[var(--text)]">
             <Typewriter
@@ -84,7 +84,7 @@ export default function Hero() {
         </p>
 
         {/* description */}
-        <p className="hero-enter hero-enter-delay-3 mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--text-muted)] sm:text-base">
+        <p className="hero-enter hero-enter-delay-3 mx-auto mt-4 max-w-xl px-1 text-[15px] leading-7 text-[var(--text-muted)] sm:mt-5 sm:px-0 sm:text-base sm:leading-relaxed">
           Hey, I&apos;m {site.name} — a Computer Science student focused on
           building modern, scalable and user-friendly web applications.
         </p>
@@ -95,18 +95,18 @@ export default function Hero() {
         </p>
 
         {/* CTAs */}
-        <div className="hero-enter hero-enter-delay-4 mt-9 flex flex-wrap items-center justify-center gap-4">
+        <div className="hero-enter hero-enter-delay-4 mt-7 flex flex-col items-center justify-center gap-3 min-[400px]:flex-row sm:mt-9 sm:gap-4">
           <a
             href={site.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 rounded-full border border-[var(--line-soft)] bg-[var(--surface)] px-6 py-3 text-sm font-medium text-[var(--text)] transition-all duration-[250ms] ease-out hover:-translate-y-0.5 hover:bg-[var(--surface-hover)] hover:shadow-[0_8px_24px_rgba(232,177,107,0.15)]"
+            className="group flex max-[399px]:w-full max-[399px]:justify-center items-center gap-2 rounded-full border border-[var(--line-soft)] bg-[var(--surface)] px-6 py-3 text-sm font-medium text-[var(--text)] transition-all duration-[250ms] ease-out hover:-translate-y-0.5 hover:bg-[var(--surface-hover)] hover:shadow-[0_8px_24px_rgba(232,177,107,0.15)]"
           >
             <span aria-hidden="true">👋</span> Let&apos;s Connect
           </a>
           <a
             href={site.links.projects}
-            className="group flex items-center gap-2 rounded-full border border-[var(--line-soft)] px-6 py-3 text-sm font-medium text-[var(--text)] transition-all duration-[250ms] ease-out hover:border-[var(--text-muted)]"
+            className="group flex max-[399px]:w-full max-[399px]:justify-center items-center gap-2 rounded-full border border-[var(--line-soft)] px-6 py-3 text-sm font-medium text-[var(--text)] transition-all duration-[250ms] ease-out hover:border-[var(--text-muted)]"
           >
             View Projects{" "}
             <ArrowRight

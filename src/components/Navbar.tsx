@@ -134,7 +134,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="flex items-center gap-1.5 rounded-full border border-[var(--line-soft)] bg-[var(--nav-bg)]/90 px-2.5 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-md">
+      <div className="flex items-center gap-0.5 rounded-full border border-[var(--line-soft)] bg-[var(--nav-bg)]/90 px-1.5 py-2 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-md md:gap-1.5 md:px-2.5">
         {navItems.map(({ id, href, label, icon: Icon }) => {
           const isActive = active === id;
           return (
@@ -143,7 +143,7 @@ export default function Navbar() {
               href={href}
               aria-label={label}
               aria-current={isActive ? "page" : undefined}
-              className="relative flex h-9 w-9 items-center justify-center rounded-full transition-colors"
+              className="relative flex h-11 w-11 items-center justify-center rounded-full transition-colors md:h-9 md:w-9"
             >
               {isActive && (
                 <motion.span
@@ -168,14 +168,14 @@ export default function Navbar() {
           );
         })}
 
-        <span className="mx-1 h-5 w-px bg-[var(--line-soft)]" aria-hidden="true" />
+        <span className="mx-0.5 hidden h-5 w-px bg-[var(--line-soft)] min-[440px]:block md:mx-1" aria-hidden="true" />
 
         <a
           href={site.links.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
-          className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text)]"
+          className="hidden h-11 w-11 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text)] min-[440px]:flex md:h-9 md:w-9"
         >
           <motion.span
             whileHover={{ scale: 1.15, y: -1 }}
@@ -191,7 +191,7 @@ export default function Navbar() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text)]"
+          className="hidden h-11 w-11 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text)] min-[440px]:flex md:h-9 md:w-9"
         >
           <motion.span
             whileHover={{ scale: 1.15, y: -1 }}
@@ -203,14 +203,14 @@ export default function Navbar() {
           </motion.span>
         </a>
 
-        <span className="mx-1 h-5 w-px bg-[var(--line-soft)]" aria-hidden="true" />
+        <span className="mx-0.5 hidden h-5 w-px bg-[var(--line-soft)] min-[440px]:block md:mx-1" aria-hidden="true" />
 
         <button
           type="button"
           onClick={toggleTheme}
           aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           aria-pressed={!isDark}
-          className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text)]"
+          className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-hover)] hover:text-[var(--text)] md:h-9 md:w-9"
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
